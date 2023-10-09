@@ -25,15 +25,22 @@ public class Clock implements ClockInterface, StateInterface {
      */
     @Override
     public void displayTime() {
-        if(currentState == ClockState.DisplayTime) {
+        if (currentState == ClockState.DisplayTime) {
             System.out.println(localTime.format(TIME_FORMATTER));
-        } else if(currentState == ClockState.DisplayDate) {
-            changeState();
-        } else if(currentState == ClockState.ChangeTime) {
-            set();
-        } else {
-            System.out.println("Invalid State");
+            return;
         }
+
+        if (currentState == ClockState.DisplayDate) {
+            changeState();
+            return;
+        }
+
+        if (currentState == ClockState.ChangeTime) {
+            set();
+            return;
+        }
+
+        System.out.println("Invalid State");
     }
 
     /**
@@ -42,57 +49,67 @@ public class Clock implements ClockInterface, StateInterface {
      */
     @Override
     public void displayDate() {
-        if(currentState == ClockState.DisplayDate) {
+        if (currentState == ClockState.DisplayDate) {
             System.out.println(localDate.format(DATE_FORMATTER));
-        } else if(currentState == ClockState.DisplayTime) {
-            changeState();
-        } else if(currentState == ClockState.ChangeDate) {
-            set();
-        } else {
-            System.out.println("Invalid State");
+            return;
         }
+        if (currentState == ClockState.DisplayTime) {
+            changeState();
+            return;
+        }
+        if (currentState == ClockState.ChangeDate) {
+            set();
+            return;
+        }
+        System.out.println("Invalid State");
     }
 
     /**
      * Change the current time based on user input.
      * The behavior depends on the current state of the clock.
+     *
      * @param userInput The new time in HH:MM format.
      */
     @Override
     public void changeTime(String userInput) {
-        if(currentState == ClockState.ChangeTime) {
+        if (currentState == ClockState.ChangeTime) {
             try {
                 LocalTime newTime = LocalTime.parse(userInput, TIME_FORMATTER);
                 setLocalTime(newTime);
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 System.out.println("Invalid time format. Please use HH:MM.");
             }
-        } else if(currentState == ClockState.DisplayTime) {
-            readyToSet();
-        } else {
-            System.out.println("Invalid State");
+            return;
         }
+        if (currentState == ClockState.DisplayTime) {
+            readyToSet();
+            return;
+        }
+        System.out.println("Invalid State");
     }
 
     /**
      * Change the current date based on user input.
      * The behavior depends on the current state of the clock.
+     *
      * @param userInput The new date in yyyy-MM-dd format.
      */
     @Override
     public void changeDate(String userInput) {
-        if(currentState == ClockState.ChangeDate) {
+        if (currentState == ClockState.ChangeDate) {
             try {
                 LocalDate newDate = LocalDate.parse(userInput, DATE_FORMATTER);
                 setLocalDate(newDate);
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format. Please use yyyy-MM-dd.");
             }
-        } else if(currentState == ClockState.DisplayDate) {
-            readyToSet();
-        } else {
-            System.out.println("Invalid State");
+            return;
         }
+        if (currentState == ClockState.DisplayDate) {
+            readyToSet();
+            return;
+        }
+        System.out.println("Invalid State");
     }
 
     /**
@@ -100,9 +117,11 @@ public class Clock implements ClockInterface, StateInterface {
      */
     @Override
     public void changeState() {
-        if(currentState == ClockState.DisplayTime) {
+        if (currentState == ClockState.DisplayTime) {
             currentState = ClockState.DisplayDate;
-        } else if(currentState == ClockState.DisplayDate){
+            return;
+        }
+        if (currentState == ClockState.DisplayDate) {
             currentState = ClockState.DisplayTime;
         }
     }
@@ -113,9 +132,11 @@ public class Clock implements ClockInterface, StateInterface {
      */
     @Override
     public void readyToSet() {
-        if(currentState == ClockState.DisplayTime) {
+        if (currentState == ClockState.DisplayTime) {
             currentState = ClockState.ChangeTime;
-        } else if(currentState == ClockState.DisplayDate) {
+            return;
+        }
+        if (currentState == ClockState.DisplayDate) {
             currentState = ClockState.ChangeDate;
         }
     }
@@ -125,9 +146,11 @@ public class Clock implements ClockInterface, StateInterface {
      */
     @Override
     public void set() {
-        if(currentState == ClockState.ChangeTime) {
+        if (currentState == ClockState.ChangeTime) {
             currentState = ClockState.DisplayTime;
-        } else if(currentState == ClockState.ChangeDate) {
+            return;
+        }
+        if (currentState == ClockState.ChangeDate) {
             currentState = ClockState.DisplayDate;
         }
     }
