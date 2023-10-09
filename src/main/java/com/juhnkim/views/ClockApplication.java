@@ -1,6 +1,7 @@
 package com.juhnkim.views;
 
 import com.juhnkim.models.Clock;
+import com.juhnkim.models.ClockState;
 
 import java.util.Scanner;
 
@@ -33,14 +34,24 @@ public class ClockApplication {
                     clock.displayDate();
                     break;
                 case "3":
-                    System.out.println("Enter new time");
-                    userInput = scan.nextLine();
-                    clock.changeTime(userInput);
+                    if (clock.getCurrentState() == ClockState.DisplayTime) {
+                        clock.readyToSet();
+                        System.out.println("Enter new time 'HH:MM'");
+                        userInput = scan.nextLine();
+                        clock.changeTime(userInput);
+                    } else {
+                        System.out.println("Invalid state for editing time.");
+                    }
                     break;
                 case "4":
-                    System.out.println("Enter new date");
-                    userInput = scan.nextLine();
-                    clock.changeDate(userInput);
+                    if (clock.getCurrentState() == ClockState.DisplayDate) {
+                        clock.readyToSet();
+                        System.out.println("Enter new date 'yyyy-mm-dd");
+                        userInput = scan.nextLine();
+                        clock.changeDate(userInput);
+                    } else {
+                        System.out.println("Invalid state for editing date.");
+                    }
                     break;
                 case "0":
                     System.out.println("Bye :(");
