@@ -30,16 +30,16 @@ public class ClockApplication {
 
             switch (userInput) {
                 case "1":
-                    if(currentState == ClockState.DisplayDate){
+                    if (currentState == ClockState.DisplayDate) {
                         clock.changeState();
-                    }  else{
+                    } else {
                         System.out.println("Invalid choice");
                     }
                     break;
                 case "2":
-                    if(currentState == ClockState.DisplayTime){
+                    if (currentState == ClockState.DisplayTime) {
                         clock.changeState();
-                    } else{
+                    } else {
                         System.out.println("Invalid choice");
                     }
                     break;
