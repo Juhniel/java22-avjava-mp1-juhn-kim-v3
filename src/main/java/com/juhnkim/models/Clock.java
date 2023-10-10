@@ -25,7 +25,7 @@ public class Clock implements ClockInterface, StateInterface {
     @Override
     public void displayTime() {
         if (currentState == ClockState.DisplayTime) {
-            System.out.println(localTime.format(TIME_FORMATTER));
+            System.out.println(getLocalTime().format(TIME_FORMATTER));
         }
     }
 
@@ -36,7 +36,7 @@ public class Clock implements ClockInterface, StateInterface {
     @Override
     public void displayDate() {
         if (currentState == ClockState.DisplayDate) {
-            System.out.println(localDate.format(DATE_FORMATTER));
+            System.out.println(getLocalDate().format(DATE_FORMATTER));
         }
     }
 

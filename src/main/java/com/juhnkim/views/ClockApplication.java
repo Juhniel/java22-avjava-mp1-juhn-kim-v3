@@ -14,8 +14,9 @@ public class ClockApplication {
         String userInput = "";
 
         while (!userInput.equals("0")) {
+            ClockState currentState = clock.getCurrentState();
             System.out.println("------------------------------------------------------");
-            System.out.println("Current State: " + clock.getCurrentState());
+            System.out.println("Current State: " + currentState);
             System.out.println("------------------------------------------------------");
             System.out.println("""
                     -- CLOCK --\s
@@ -26,7 +27,7 @@ public class ClockApplication {
                     0. Exit""");
 
             userInput = scan.nextLine();
-//            ClockState currentState = clock.getCurrentState();
+
             switch (userInput) {
                 case "1":
                     if(clock.getCurrentState() == ClockState.DisplayDate){
