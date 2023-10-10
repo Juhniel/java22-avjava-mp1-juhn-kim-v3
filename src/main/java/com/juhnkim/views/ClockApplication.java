@@ -30,22 +30,21 @@ public class ClockApplication {
 
             switch (userInput) {
                 case "1":
-                    if(clock.getCurrentState() == ClockState.DisplayDate){
+                    if(currentState == ClockState.DisplayDate){
                         clock.changeState();
                     }  else{
                         System.out.println("Invalid choice");
                     }
                     break;
                 case "2":
-                    if(clock.getCurrentState() == ClockState.DisplayTime){
+                    if(currentState == ClockState.DisplayTime){
                         clock.changeState();
                     } else{
-
                         System.out.println("Invalid choice");
                     }
                     break;
                 case "3":
-                    if (clock.getCurrentState() == ClockState.DisplayTime) {
+                    if (currentState == ClockState.DisplayTime) {
                         clock.readyToSet();
                         System.out.println("Enter new time 'HH:MM:SS'");
                         userInput = scan.nextLine();
@@ -56,7 +55,7 @@ public class ClockApplication {
                     }
                     break;
                 case "4":
-                    if (clock.getCurrentState() == ClockState.DisplayDate) {
+                    if (currentState == ClockState.DisplayDate) {
                         clock.readyToSet();
                         System.out.println("Enter new date 'yyyy-mm-dd");
                         userInput = scan.nextLine();
