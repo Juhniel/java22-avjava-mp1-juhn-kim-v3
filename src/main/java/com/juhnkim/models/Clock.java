@@ -29,37 +29,32 @@ public class Clock implements ClockInterface, StateInterface {
         }
     }
 
-
     /**
      * Display the current date.
      */
     @Override
     public void displayDate() {
-        if (currentState == ClockState.DisplayDate) {
-            System.out.println(getLocalDate().format(DATE_FORMATTER));
-        }
+        if (currentState == ClockState.DisplayDate) System.out.println(getLocalDate().format(DATE_FORMATTER));
     }
 
     /**
      * Change the current time based on user input.
-     * The behavior depends on the current state of the clock.
      *
-     * @param userInput The new time in HH:MM format.
+     * @param userInput The new time in HH:mm:ss format.
      */
     @Override
     public void changeTime(String userInput) {
-            try {
-                LocalTime newTime = LocalTime.parse(userInput, TIME_FORMATTER);
-                setLocalTime(newTime);
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid time format. Please use HH:MM.");
-            }
+        try {
+            LocalTime newTime = LocalTime.parse(userInput, TIME_FORMATTER);
+            setLocalTime(newTime);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid time format. Please use HH:mm:ss");
         }
+    }
 
 
     /**
      * Change the current date based on user input.
-     * The behavior depends on the current state of the clock.
      *
      * @param userInput The new date in yyyy-MM-dd format.
      */
@@ -76,25 +71,25 @@ public class Clock implements ClockInterface, StateInterface {
     }
 
     /**
-     * Change the state between displaying time and displaying date.
+     * Toggle the state between displaying time and displaying date.
      */
     @Override
     public void changeState() {
-        if(currentState == ClockState.DisplayTime){
+        if (currentState == ClockState.DisplayTime) {
             currentState = ClockState.DisplayDate;
             displayDate();
-        }else if(currentState == ClockState.DisplayDate) {
+            return;
+        }
+        if (currentState == ClockState.DisplayDate) {
             currentState = ClockState.DisplayTime;
             displayTime();
-        }else{
-            System.out.println("Invalid choice");
+            return;
         }
-
+        System.out.println("Invalid State");
     }
 
     /**
      * Prepare the clock to change the time or date.
-     * This sets the state to either ChangeTime or ChangeDate.
      */
     @Override
     public void readyToSet() {
@@ -106,12 +101,11 @@ public class Clock implements ClockInterface, StateInterface {
             currentState = ClockState.ChangeDate;
             return;
         }
-
-        System.out.println("Invalid Choice");
+        System.out.println("Invalid State");
     }
 
     /**
-     * Set the clock back to display mode after a time or date has been changed.
+     * Reset the clock to display mode after changing the time or date.
      */
     @Override
     public void set() {
@@ -120,6 +114,7 @@ public class Clock implements ClockInterface, StateInterface {
             displayTime();
             return;
         }
+
         if (currentState == ClockState.ChangeDate) {
             currentState = ClockState.DisplayDate;
             displayDate();
