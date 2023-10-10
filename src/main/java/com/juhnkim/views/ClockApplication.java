@@ -26,19 +26,30 @@ public class ClockApplication {
                     0. Exit""");
 
             userInput = scan.nextLine();
+//            ClockState currentState = clock.getCurrentState();
             switch (userInput) {
                 case "1":
-                    clock.displayTime();
+                    if(clock.getCurrentState() == ClockState.DisplayDate){
+                        clock.changeState();
+                    }  else{
+                        System.out.println("Invalid choice");
+                    }
                     break;
                 case "2":
-                    clock.displayDate();
+                    if(clock.getCurrentState() == ClockState.DisplayTime){
+                        clock.changeState();
+                    } else{
+
+                        System.out.println("Invalid choice");
+                    }
                     break;
                 case "3":
                     if (clock.getCurrentState() == ClockState.DisplayTime) {
                         clock.readyToSet();
-                        System.out.println("Enter new time 'HH:MM'");
+                        System.out.println("Enter new time 'HH:MM:SS'");
                         userInput = scan.nextLine();
                         clock.changeTime(userInput);
+                        clock.set();
                     } else {
                         System.out.println("Invalid state for editing time.");
                     }
@@ -49,6 +60,7 @@ public class ClockApplication {
                         System.out.println("Enter new date 'yyyy-mm-dd");
                         userInput = scan.nextLine();
                         clock.changeDate(userInput);
+                        clock.set();
                     } else {
                         System.out.println("Invalid state for editing date.");
                     }
