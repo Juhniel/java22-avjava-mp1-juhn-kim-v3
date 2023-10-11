@@ -2,6 +2,7 @@ package com.juhnkim.models;
 
 import com.juhnkim.interfaces.ClockInterface;
 import com.juhnkim.interfaces.StateInterface;
+import com.juhnkim.utils.ClockState;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,4 +1,4 @@
-package com.juhnkim.models;
+package com.juhnkim.utils;
 
 public enum ClockState {
         DisplayTime,

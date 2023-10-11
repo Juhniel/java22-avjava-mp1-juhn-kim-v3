@@ -1,7 +1,7 @@
 package com.juhnkim.views;
 
 import com.juhnkim.models.Clock;
-import com.juhnkim.models.ClockState;
+import com.juhnkim.utils.ClockState;
 
 import java.util.Scanner;
 
